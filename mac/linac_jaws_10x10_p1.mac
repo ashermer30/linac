@@ -589,7 +589,7 @@
 
 
 /gate/mlc_leaf/repeaters/insert		genericRepeater
-/gate/mlc_leaf/genericRepeater/setPlacementsFilename	/home/lb8075/linac/data/leafedge.txt
+/gate/mlc_leaf/genericRepeater/setPlacementsFilename	/home/as17540/linac/data/leafedge.txt
 /gate/mlc_leaf/genericRepeater/useRelativeTranslation	0
 
 #-------------------------Kill X and Y jaws------------------------
