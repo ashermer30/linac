@@ -75,7 +75,7 @@
 # Jaws
 # -----------------------------------------------------
 
-/control/execute /home/as17540/linac/mac/linac_jaws_{jaws}.mac
+/control/execute mac/linac_jaws_{jaws}.mac
 
 /gate/world/daughters/name                   PhS_Plane_Two
 /gate/world/daughters/insert                 box
