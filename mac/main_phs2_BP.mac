@@ -5,6 +5,8 @@
 # id
 # seed
 # primaries
+# material
+# matFile
 
 #=====================================================
 # VERBOSITY
@@ -22,10 +24,10 @@
 # GEOMETRY
 # =====================================================
 
-/gate/geometry/setMaterialDatabase /home/lb8075/linac/data/GateMaterials.db
+/gate/geometry/setMaterialDatabase /home/as17540/linac/data/{matFile}
 
 # WORLD
-/gate/world/setMaterial            Air
+/gate/world/setMaterial            {material}
 /gate/world/geometry/setXLength    0.80 m
 /gate/world/geometry/setYLength    0.80 m
 /gate/world/geometry/setZLength    2.1 m
@@ -58,8 +60,8 @@
 /gate/linac/vis/setVisible               1
 
 
-# /gate/geometry/setMaterialDatabase data/PreciseMaterials.db
-# /control/execute mac/linac_head.mac
+# /gate/geometry/setMaterialDatabase /home/as17540/linac/data/PreciseMaterials.db
+# /control/execute /home/as17540/linac/mac/linac_head.mac
 
 /gate/linac/daughters/name               PhS_Plane
 /gate/linac/daughters/insert             cylinder
@@ -75,7 +77,7 @@
 # Jaws
 # -----------------------------------------------------
 
-/control/execute /home/lb8075/linac/mac/linac_jaws_{jaws}.mac
+/control/execute /home/as17540/linac/mac/linac_jaws_{jaws}.mac
 
 /gate/world/daughters/name                   PhS_Plane_Two
 /gate/world/daughters/insert                 box
@@ -213,7 +215,7 @@
 
 /gate/source/addSource                         beam_g phaseSpace
 #/gate/source/beam_g/addPhaseSpaceFile          /work/lb8075/PhaseSpaces/PhS1AB_Gamma/output-PhS{id}.root
-/gate/source/beam_g/addPhaseSpaceFile          /work/lb8075/PhaseSpaces/PhS1AB_Gamma_ZeroBias/output-PhS_bias1_{id}.root
+/gate/source/beam_g/addPhaseSpaceFile          /work/lb8075/PhaseSpaces/PhS1AB_Gamma_ZeroBias/Skimmed_output-PhS_bias1_{id}.root
 /gate/source/beam_g/setParticleType            gamma
 /gate/source/beam_g/attachTo                   PhS_Plane
 /gate/source/beam_g/useRandomSymmetry          true
