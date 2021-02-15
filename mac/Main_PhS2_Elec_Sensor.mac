@@ -1,14 +1,17 @@
 
 # INPUTS
-# pathGateMaterials
 # pathOutputDose
 # id
 # inputPhaseSpaceFile
 # seed 
 # primaries
-# [inputPhaseSpaceFile,/Users/lb8075/gate-exercices-master-linac/linac/generatedGammasnSkimmed10Halfmm1.root] [seed,12345678] [primaries,200] [pathGateMaterials,/Users/lb8075/gate-exercices-master-linac/linac/data/GateMaterials.db] [id,1] [pathOutputDose,/Users/lb8075/gate-exercices-master-linac/linac/output/BigSensorTest.root]
+# peakzlength_um
+# peakztrans_mm
+# peak_material
+# inputParticleType
+# density
 
-# Gate /home/lb8075/linac/mac/Main_PhS3_BigSensor_Flexible_airbox_Grating_Y.mac -a '[id,1] [peakzlength_um,400] [peakztrans_mm,-5.3] [peak_material,Aluminium] [inputPhaseSpaceFile,/work/lb8075/PhaseSpaces/Generated_PhS2_Electrons_${field}/generatedElectron_PhS2_${field}_{id}.root] [seed,123456] [primaries,100000] [pathGateMaterials,/home/lb8075/linac/data/GateMaterials.db] [pathOutputDose,/work/lb8075/PhaseSpaces/PhS3BigSensor_${field}_Elec_Square/] [inputParticleType,/gate/source/beam_g/setParticleType e-]'
+# Gate /home/as17540/linac/mac/Main_PhS2_Elec_Sensor.mac -a '[id,$jobid] [density,10xSeaLevel] [peakzlength_um,400] [peakztrans_mm,-5.3] [peakzlength2_um,400] [peakztrans2_mm,-5.3] [peakzlength3_um,400] [peakztrans3_mm,-5.3] [peakzlength4_um,400] [peakztrans4_mm,-5.3] [peak_material,Aluminium] [inputPhaseSpaceFile,/work/as17540/PhaseSpaces/Generated_PhS2_Electrons_10x10_10xSeaLevel/generatedElectron_PhS2_10x10_{density}_{id}.root] [seed,1234567] [primaries,1000000] [pathOutputDose,/Users/as17540/PhaseSpaces/PhS3_Sensor_10x10_Elec/] [inputParticleType,/gate/source/beam_g/setParticleType e-]'
 
 #=====================================================
 # VISUALISATION
@@ -20,8 +23,7 @@
 # GEOMETRY
 # =====================================================
 
-/gate/geometry/setMaterialDatabase {pathGateMaterials}
-#/home/as17540/linac/data/GateMaterials.db
+/gate/geometry/setMaterialDatabase /home/as17540/linac/data/GateMaterials.db
 
 # WORLD
 /gate/world/setMaterial            Air
@@ -178,8 +180,7 @@
 ## Dose output electron
 ## 
 /gate/actor/addActor                               DoseActor  doseDistribution
-/gate/actor/doseDistribution/save                  {pathOutputDose}/Epi-{peakzlength_um}_{peakzlength2_um}_{peakzlength3_um}_{peakzlength4_um}_peakum-{orientation}-{peak_material}-{id}.root
-#/work/lb8075/PhaseSpaces/PhS3DoseFromGamma_50um_plastic1cm/Epi-30mm-no-bias{id}.root
+/gate/actor/doseDistribution/save                  {pathOutputDose}/Epi-{peakzlength_um}_peakum-{peak_material}-{density}-{id}.root
 /gate/actor/doseDistribution/attachTo              epi
 /gate/actor/doseDistribution/stepHitType           random
 /gate/actor/doseDistribution/setPosition           0 0 0 cm
