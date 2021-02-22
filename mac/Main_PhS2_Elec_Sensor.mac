@@ -17,7 +17,7 @@
 # inputParticleType
 # density
 
-# Gate /home/as17540/linac/mac/Main_PhS2_Elec_Sensor.mac -a '[id,$jobid] [density,10xSeaLevel] [peakzlength_um,10] [peakztrans_mm,-5.495] [peakzlength2_um,30] [peakztrans2_mm,-5.485] [peakzlength3_um,50] [peakztrans3_mm,-5.475] [peakzlength4_um,70] [peakztrans4_mm,-5.465] [peak_material,Copper] [inputPhaseSpaceFile,/work/as17540/PhaseSpaces/Generated_PhS2_Electrons_10x10_10xSeaLevel/generatedElectron_PhS2_10x10_{density}_{id}.root] [seed,1234567] [primaries,1000000] [pathOutputDose,/work/as17540/PhaseSpaces/PhS3_Sensor_10x10_Elec/] [inputParticleType,/gate/source/beam_g/setParticleType e-]'
+# Gate /home/as17540/linac/mac/Main_PhS2_Elec_Sensor.mac -a '[id,$jobid] [density,10xSeaLevel] [peakzlength_um,10] [peakztrans_mm,-5.495] [peakzlength2_um,30] [peakztrans2_mm,-5.485] [peakzlength3_um,50] [peakztrans3_mm,-5.475] [peakzlength4_um,70] [peakztrans4_mm,-5.465] [peak_material,Copper] [inputPhaseSpaceFile,/work/as17540/PhaseSpaces/Generated_PhS2_Electrons_10x10_10xSeaLevel/generatedElectron_PhS2_10x10_{density}_1.root] [seed,1234567] [primaries,1000000] [pathOutputDose,/work/as17540/PhaseSpaces/PhS3_Sensor_10x10_Elec/] [inputParticleType,/gate/source/beam_g/setParticleType e-]'
 
 #=====================================================
 # VISUALISATION
@@ -186,7 +186,7 @@
 ## Dose output electron
 ## 
 /gate/actor/addActor                               DoseActor  doseDistribution
-/gate/actor/doseDistribution/save                  {pathOutputDose}/Epi-{peakzlength_um}-{peakzlength2_um}-{peakzlength3_um}-{peakzlength4_um}_peakum-{peak_material}-{density}-{id}.root
+/gate/actor/doseDistribution/save                  {pathOutputDose}/Epi-{peakzlength_um}-{peakzlength2_um}-{peakzlength3_um}-{peakzlength4_um}_peakum-{peak_material}-{density}.root
 /gate/actor/doseDistribution/attachTo              epi
 /gate/actor/doseDistribution/stepHitType           random
 /gate/actor/doseDistribution/setPosition           0 0 0 cm
