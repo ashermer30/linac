@@ -183,7 +183,7 @@
 ## Dose output electron
 ## 
 /gate/actor/addActor                               DoseActor  doseDistribution
-/gate/actor/doseDistribution/save                  {pathOutputDose}/Epi-{peakzlength_um}-{peakzlength2_um}-{peakzlength3_um}-{peakzlength4_um}_peakum-{peak_material}-Everest.root
+/gate/actor/doseDistribution/save                  {pathOutputDose}/Epi-{peakzlength_um}-{peakzlength2_um}-{peakzlength3_um}-{peakzlength4_um}_peakum-{peak_material}-Everest-{id}.root
 /gate/actor/doseDistribution/attachTo              epi
 /gate/actor/doseDistribution/stepHitType           random
 /gate/actor/doseDistribution/setPosition           0 0 0 cm
