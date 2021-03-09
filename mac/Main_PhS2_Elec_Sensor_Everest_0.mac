@@ -156,9 +156,9 @@
 /gate/physics/Electron/SetCutInRegion   bulk 0.0001 mm
 /gate/physics/Positron/SetCutInRegion   bulk 0.0001 mm
 
-/gate/physics/Gamma/SetCutInRegion      peakLayer1 0.0001 mm #0.0001
-/gate/physics/Electron/SetCutInRegion   peakLayer1 0.0001 mm
-/gate/physics/Positron/SetCutInRegion   peakLayer1 0.0001 mm
+#/gate/physics/Gamma/SetCutInRegion      peakLayer1 0.0001 mm #0.0001
+#/gate/physics/Electron/SetCutInRegion   peakLayer1 0.0001 mm
+#/gate/physics/Positron/SetCutInRegion   peakLayer1 0.0001 mm
 
 /gate/physics/Gamma/SetCutInRegion      peakLayer2 0.0001 mm #0.0001
 /gate/physics/Electron/SetCutInRegion   peakLayer2 0.0001 mm
