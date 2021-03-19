@@ -1,0 +1,406 @@
+# INPUTS
+# pathOutputDose
+# id
+# seed 
+# primaries
+# peakzlength_um
+# peakztrans_mm
+# peakzlength2_um
+# peakztrans2_mm
+# peakzlength3_um
+# peakztrans3_mm
+# peakzlength4_um
+# peakztrans4_mm
+# peak_material
+
+# Gate /home/as17540/linac/mac/Main_PhS2_Elec_Sensor_1.1xSeaLevel.mac -a '[id,$PBS_ARRAY_INDEX] [peakzlength_um,10] [peakztrans_mm,-5.495] [peakzlength2_um,30] [peakztrans2_mm,-5.485] [peakzlength3_um,50] [peakztrans3_mm,-5.475] [peakzlength4_um,70] [peakztrans4_mm,-5.465] [peak_material,Copper] [seed,$RANDOM$RANDOM$RANDOM] [primaries,11808000] [pathOutputDose,/work/as17540/PhaseSpaces/PhS3_Sensor_10x10_Elec/]'
+
+#=====================================================
+# VISUALISATION
+#=====================================================
+
+#/control/execute mac/visu.mac
+
+# =====================================================
+# GEOMETRY
+# =====================================================
+
+/gate/geometry/setMaterialDatabase /home/as17540/linac/data/GateMaterials_1.1xSeaLevel.db
+
+# WORLD
+/gate/world/setMaterial            Air
+/gate/world/geometry/setXLength    0.3 m
+/gate/world/geometry/setYLength    0.3 m
+/gate/world/geometry/setZLength    1 m
+/gate/world/vis/setVisible 1
+
+/gate/world/daughters/name                   PhS_Plane_Two
+/gate/world/daughters/insert                 box
+/gate/PhS_Plane_Two/setMaterial              Vacuum
+/gate/PhS_Plane_Two/geometry/setXLength      22 cm
+/gate/PhS_Plane_Two/geometry/setYLength      22 cm
+/gate/PhS_Plane_Two/geometry/setZLength      1 nm
+/gate/PhS_Plane_Two/placement/setTranslation 0.0 0.0 471 mm #(-529)
+/gate/PhS_Plane_Two/vis/setColor             cyan
+/gate/PhS_Plane_Two/vis/setVisible           1
+
+/gate/world/daughters/name                   Kill_BackPlane
+/gate/world/daughters/insert                 box
+/gate/Kill_BackPlane/setMaterial                   Air	
+/gate/Kill_BackPlane/geometry/setXLength           30 cm
+/gate/Kill_BackPlane/geometry/setYLength           30 cm
+/gate/Kill_BackPlane/geometry/setZLength           1 nm
+/gate/Kill_BackPlane/placement/setTranslation      0.0 0.0 480 mm
+/gate/Kill_BackPlane/vis/setColor                  red
+/gate/Kill_BackPlane/vis/setVisible                1
+
+/gate/world/daughters/name                   Kill_FrontPlane
+/gate/world/daughters/insert                 box
+/gate/Kill_FrontPlane/setMaterial                   Air	
+/gate/Kill_FrontPlane/geometry/setXLength           30 cm
+/gate/Kill_FrontPlane/geometry/setYLength           30 cm
+/gate/Kill_FrontPlane/geometry/setZLength           1 nm
+/gate/Kill_FrontPlane/placement/setTranslation      0.0 0.0 445 mm
+/gate/Kill_FrontPlane/vis/setColor                  red
+/gate/Kill_FrontPlane/vis/setVisible                1
+
+/gate/world/daughters/name         epi
+/gate/world/daughters/insert       box
+/gate/epi/setMaterial                  Silicon
+/gate/epi/geometry/setXLength          180.0 mm
+/gate/epi/geometry/setYLength          180.0 mm
+/gate/epi/geometry/setZLength          0.01 mm
+/gate/epi/placement/setTranslation     0 0 449.995 mm
+/gate/epi/vis/setVisible               1
+/gate/epi/vis/setColor                 yellow
+/gate/epi/vis/forceSolid
+
+/gate/world/daughters/name         bulk
+/gate/world/daughters/insert       box
+/gate/bulk/setMaterial                  Silicon
+/gate/bulk/geometry/setXLength          180.0 mm
+/gate/bulk/geometry/setYLength          180.0 mm
+/gate/bulk/geometry/setZLength          0.6 mm
+/gate/bulk/placement/setTranslation     0 0 449.69 mm
+/gate/bulk/vis/setVisible               1
+/gate/bulk/vis/setColor                 red
+
+/gate/world/daughters/name         peak_air_box 
+/gate/world/daughters/insert       box 
+/gate/peak_air_box/setMaterial                  Air 
+/gate/peak_air_box/geometry/setXLength          200.0 mm 
+/gate/peak_air_box/geometry/setYLength          200.0 mm 
+/gate/peak_air_box/geometry/setZLength          11 mm 
+/gate/peak_air_box/placement/setTranslation     0 0 455.5 mm
+/gate/peak_air_box/vis/setVisible               1 
+/gate/peak_air_box/vis/setColor                 green
+/gate/peak_air_box/vis/forceWireframe
+
+/gate/peak_air_box/daughters/name         peakLayer1 
+/gate/peak_air_box/daughters/insert       box 
+/gate/peakLayer1/setMaterial                  {peak_material} 
+/gate/peakLayer1/geometry/setXLength          10.0 mm 
+/gate/peakLayer1/geometry/setYLength          10.0 mm 
+/gate/peakLayer1/geometry/setZLength          {peakzlength_um} um 
+/gate/peakLayer1/placement/setTranslation     -5 5 {peakztrans_mm} mm
+/gate/peakLayer1/vis/setVisible               1 
+/gate/peakLayer1/vis/setColor                 grey
+/gate/peakLayer1/vis/forceSolid
+
+/gate/peak_air_box/daughters/name         peakLayer2 
+/gate/peak_air_box/daughters/insert       box 
+/gate/peakLayer2/setMaterial                  {peak_material} 
+/gate/peakLayer2/geometry/setXLength          10.0 mm 
+/gate/peakLayer2/geometry/setYLength          10.0 mm 
+/gate/peakLayer2/geometry/setZLength          {peakzlength2_um} um 
+/gate/peakLayer2/placement/setTranslation     5 5 {peakztrans2_mm} mm
+/gate/peakLayer2/vis/setVisible               1 
+/gate/peakLayer2/vis/setColor                 red
+/gate/peakLayer2/vis/forceSolid
+
+/gate/peak_air_box/daughters/name         peakLayer3 
+/gate/peak_air_box/daughters/insert       box 
+/gate/peakLayer3/setMaterial                  {peak_material} 
+/gate/peakLayer3/geometry/setXLength          10.0 mm 
+/gate/peakLayer3/geometry/setYLength          10.0 mm 
+/gate/peakLayer3/geometry/setZLength          {peakzlength3_um} um 
+/gate/peakLayer3/placement/setTranslation     -5 -5 {peakztrans3_mm} mm
+/gate/peakLayer3/vis/setVisible               1 
+/gate/peakLayer3/vis/setColor                 red
+/gate/peakLayer3/vis/forceSolid
+
+/gate/peak_air_box/daughters/name         peakLayer4 
+/gate/peak_air_box/daughters/insert       box 
+/gate/peakLayer4/setMaterial                  {peak_material} 
+/gate/peakLayer4/geometry/setXLength          10.0 mm 
+/gate/peakLayer4/geometry/setYLength          10.0 mm 
+/gate/peakLayer4/geometry/setZLength          {peakzlength4_um} um 
+/gate/peakLayer4/placement/setTranslation     5 -5 {peakztrans4_mm} mm
+/gate/peakLayer4/vis/setVisible               1 
+/gate/peakLayer4/vis/setColor                 red
+/gate/peakLayer4/vis/forceSolid
+
+# =====================================================
+# PHYSICS
+# =====================================================
+
+/gate/physics/addPhysicsList emstandard_opt4
+
+/gate/physics/Gamma/SetCutInRegion      world 1 mm
+/gate/physics/Electron/SetCutInRegion   world 1 mm
+/gate/physics/Positron/SetCutInRegion   world 1 mm
+
+/gate/physics/Gamma/SetCutInRegion      epi 0.0001 mm 
+/gate/physics/Electron/SetCutInRegion   epi 0.0001 mm
+/gate/physics/Positron/SetCutInRegion   epi 0.0001 mm
+
+/gate/physics/Gamma/SetCutInRegion      bulk 0.0001 mm
+/gate/physics/Electron/SetCutInRegion   bulk 0.0001 mm
+/gate/physics/Positron/SetCutInRegion   bulk 0.0001 mm
+
+/gate/physics/Gamma/SetCutInRegion      peakLayer1 0.0001 mm #0.0001
+/gate/physics/Electron/SetCutInRegion   peakLayer1 0.0001 mm
+/gate/physics/Positron/SetCutInRegion   peakLayer1 0.0001 mm
+
+/gate/physics/Gamma/SetCutInRegion      peakLayer2 0.0001 mm #0.0001
+/gate/physics/Electron/SetCutInRegion   peakLayer2 0.0001 mm
+/gate/physics/Positron/SetCutInRegion   peakLayer2 0.0001 mm
+
+/gate/physics/Gamma/SetCutInRegion      peakLayer3 0.0001 mm #0.0001
+/gate/physics/Electron/SetCutInRegion   peakLayer3 0.0001 mm
+/gate/physics/Positron/SetCutInRegion   peakLayer3 0.0001 mm
+
+/gate/physics/Gamma/SetCutInRegion      peakLayer4 0.0001 mm #0.0001
+/gate/physics/Electron/SetCutInRegion   peakLayer4 0.0001 mm
+/gate/physics/Positron/SetCutInRegion   peakLayer4 0.0001 mm
+
+#=====================================================
+# DETECTORS
+#=====================================================
+
+## 
+## Dose output electron
+## 
+/gate/actor/addActor                               DoseActor  doseDistribution
+/gate/actor/doseDistribution/save                  {pathOutputDose}/Epi-{peakzlength_um}-{peakzlength2_um}-{peakzlength3_um}-{peakzlength4_um}_peakum-{peak_material}-1.1xSeaLevel-{id}.root
+/gate/actor/doseDistribution/attachTo              epi
+/gate/actor/doseDistribution/stepHitType           random
+/gate/actor/doseDistribution/setPosition           0 0 0 cm
+/gate/actor/doseDistribution/setSize               50 50 0.010 mm
+/gate/actor/doseDistribution/setResolution         1000 1000 1	 #for 60 micron pixel x4
+/gate/actor/doseDistribution/enableNumberOfHits    true
+/gate/actor/doseDistribution/enableEdep            true
+/gate/actor/doseDistribution/enableUncertaintyEdep false
+/gate/actor/doseDistribution/enableSquaredEdep     true
+/gate/actor/doseDistribution/enableDose            false
+/gate/actor/doseDistribution/enableUncertaintyDose false
+
+
+/gate/actor/addActor   KillActor                         Kill_BP 
+/gate/actor/Kill_BP/attachTo                             Kill_BackPlane 
+
+/gate/actor/addActor   KillActor                         Kill_FP 
+/gate/actor/Kill_FP/attachTo                             Kill_FrontPlane 
+
+#=====================================================
+# INITIALISATION
+#=====================================================
+
+/gate/run/initialize
+# /process/em/setBiasingFactor compt 100 True
+
+# /process/em/setSecBiasing compt peakLayer1 100 1000 MeV
+# /particle/process/dump
+
+#=====================================================
+# BEAMS
+#=====================================================
+
+# Read from Phase Space files. Here we indicate the type of particle
+# (gamma) because this information is not stored in the PhS to gain
+# space. Moreover, we set 'useRandomSymmetry' to generate more
+# particle than the number of particle in the PhS, using a Z axis
+# symmetry.
+
+#/gate/source/addSource                         beam_g phaseSpace
+#/gate/source/beam_g/addPhaseSpaceFile          {inputPhaseSpaceFile}
+#{inputParticleType}
+#/gate/source/beam_g/attachTo                   PhS_Plane_Two
+#/gate/source/beam_g/useRandomSymmetry          true
+
+/gate/source/addSource mybeam gps 
+/gate/source/mybeam/gps/particle e- 
+/gate/source/mybeam/gps/pos/centre 0 0 471 mm 
+/gate/source/mybeam/gps/direction 0 0 -1 
+/gate/source/mybeam/gps/type Plane 
+/gate/source/mybeam/gps/shape Square 
+/gate/source/mybeam/gps/halfx 2 cm 
+/gate/source/mybeam/gps/halfy 2 cm 
+/gate/source/mybeam/gps/ene/type Arb 
+/gate/source/mybeam/gps/hist/type arb 
+/gate/source/mybeam/gps/hist/point 0.021782798633115212 16393.0
+/gate/source/mybeam/gps/hist/point 0.06514496053190669 22027.0
+/gate/source/mybeam/gps/hist/point 0.10850712243069817 26557.0
+/gate/source/mybeam/gps/hist/point 0.15186928432948965 28652.0
+/gate/source/mybeam/gps/hist/point 0.19523144622828115 29093.0
+/gate/source/mybeam/gps/hist/point 0.23859360812707262 28753.0
+/gate/source/mybeam/gps/hist/point 0.2819557700258641 28120.0
+/gate/source/mybeam/gps/hist/point 0.3253179319246556 26971.0
+/gate/source/mybeam/gps/hist/point 0.3686800938234471 25765.0
+/gate/source/mybeam/gps/hist/point 0.41204225572223857 25167.0
+/gate/source/mybeam/gps/hist/point 0.45540441762103 23228.0
+/gate/source/mybeam/gps/hist/point 0.4987665795198215 22552.0
+/gate/source/mybeam/gps/hist/point 0.5421287414186129 21319.0
+/gate/source/mybeam/gps/hist/point 0.5854909033174045 20617.0
+/gate/source/mybeam/gps/hist/point 0.6288530652161959 19857.0
+/gate/source/mybeam/gps/hist/point 0.6722152271149875 18637.0
+/gate/source/mybeam/gps/hist/point 0.7155773890137789 18210.0
+/gate/source/mybeam/gps/hist/point 0.7589395509125705 17295.0
+/gate/source/mybeam/gps/hist/point 0.8023017128113619 16695.0
+/gate/source/mybeam/gps/hist/point 0.8456638747101535 16271.0
+/gate/source/mybeam/gps/hist/point 0.8890260366089449 15769.0
+/gate/source/mybeam/gps/hist/point 0.9323881985077362 15091.0
+/gate/source/mybeam/gps/hist/point 0.9757503604065279 14558.0
+/gate/source/mybeam/gps/hist/point 1.0191125223053192 13854.0
+/gate/source/mybeam/gps/hist/point 1.0624746842041106 13518.0
+/gate/source/mybeam/gps/hist/point 1.1058368461029022 12915.0
+/gate/source/mybeam/gps/hist/point 1.1491990080016938 12568.0
+/gate/source/mybeam/gps/hist/point 1.1925611699004852 12102.0
+/gate/source/mybeam/gps/hist/point 1.2359233317992766 11705.0
+/gate/source/mybeam/gps/hist/point 1.2792854936980682 11429.0
+/gate/source/mybeam/gps/hist/point 1.3226476555968598 10865.0
+/gate/source/mybeam/gps/hist/point 1.3660098174956512 10473.0
+/gate/source/mybeam/gps/hist/point 1.4093719793944426 10177.0
+/gate/source/mybeam/gps/hist/point 1.452734141293234 10049.0
+/gate/source/mybeam/gps/hist/point 1.4960963031920256 9619.0
+/gate/source/mybeam/gps/hist/point 1.5394584650908172 9434.0
+/gate/source/mybeam/gps/hist/point 1.5828206269896086 9071.0
+/gate/source/mybeam/gps/hist/point 1.6261827888884 8568.0
+/gate/source/mybeam/gps/hist/point 1.6695449507871916 8465.0
+/gate/source/mybeam/gps/hist/point 1.7129071126859832 8134.0
+/gate/source/mybeam/gps/hist/point 1.7562692745847746 8025.0
+/gate/source/mybeam/gps/hist/point 1.799631436483566 7789.0
+/gate/source/mybeam/gps/hist/point 1.8429935983823573 7404.0
+/gate/source/mybeam/gps/hist/point 1.886355760281149 7137.0
+/gate/source/mybeam/gps/hist/point 1.9297179221799405 6931.0
+/gate/source/mybeam/gps/hist/point 1.973080084078732 6625.0
+/gate/source/mybeam/gps/hist/point 2.0164422459775233 6478.0
+/gate/source/mybeam/gps/hist/point 2.0598044078763147 6257.0
+/gate/source/mybeam/gps/hist/point 2.103166569775106 6150.0
+/gate/source/mybeam/gps/hist/point 2.146528731673898 6113.0
+/gate/source/mybeam/gps/hist/point 2.1898908935726893 5610.0
+/gate/source/mybeam/gps/hist/point 2.2332530554714807 5562.0
+/gate/source/mybeam/gps/hist/point 2.2766152173702725 5437.0
+/gate/source/mybeam/gps/hist/point 2.319977379269064 5288.0
+/gate/source/mybeam/gps/hist/point 2.3633395411678553 5101.0
+/gate/source/mybeam/gps/hist/point 2.4067017030666467 4882.0
+/gate/source/mybeam/gps/hist/point 2.450063864965438 4713.0
+/gate/source/mybeam/gps/hist/point 2.4934260268642294 4581.0
+/gate/source/mybeam/gps/hist/point 2.5367881887630213 4422.0
+/gate/source/mybeam/gps/hist/point 2.5801503506618126 4204.0
+/gate/source/mybeam/gps/hist/point 2.623512512560604 4109.0
+/gate/source/mybeam/gps/hist/point 2.666874674459396 4036.0
+/gate/source/mybeam/gps/hist/point 2.7102368363581872 4028.0
+/gate/source/mybeam/gps/hist/point 2.7535989982569786 3745.0
+/gate/source/mybeam/gps/hist/point 2.79696116015577 3714.0
+/gate/source/mybeam/gps/hist/point 2.8403233220545614 3501.0
+/gate/source/mybeam/gps/hist/point 2.883685483953353 3347.0
+/gate/source/mybeam/gps/hist/point 2.9270476458521446 3347.0
+/gate/source/mybeam/gps/hist/point 2.970409807750936 3202.0
+/gate/source/mybeam/gps/hist/point 3.0137719696497274 2985.0
+/gate/source/mybeam/gps/hist/point 3.057134131548519 2939.0
+/gate/source/mybeam/gps/hist/point 3.1004962934473106 2810.0
+/gate/source/mybeam/gps/hist/point 3.143858455346102 2778.0
+/gate/source/mybeam/gps/hist/point 3.1872206172448934 2646.0
+/gate/source/mybeam/gps/hist/point 3.2305827791436847 2623.0
+/gate/source/mybeam/gps/hist/point 3.273944941042476 2500.0
+/gate/source/mybeam/gps/hist/point 3.317307102941268 2272.0
+/gate/source/mybeam/gps/hist/point 3.3606692648400593 2376.0
+/gate/source/mybeam/gps/hist/point 3.4040314267388507 2258.0
+/gate/source/mybeam/gps/hist/point 3.4473935886376426 2153.0
+/gate/source/mybeam/gps/hist/point 3.490755750536434 2027.0
+/gate/source/mybeam/gps/hist/point 3.5341179124352253 1975.0
+/gate/source/mybeam/gps/hist/point 3.5774800743340167 1794.0
+/gate/source/mybeam/gps/hist/point 3.620842236232808 1782.0
+/gate/source/mybeam/gps/hist/point 3.6642043981315995 1725.0
+/gate/source/mybeam/gps/hist/point 3.7075665600303913 1658.0
+/gate/source/mybeam/gps/hist/point 3.7509287219291827 1573.0
+/gate/source/mybeam/gps/hist/point 3.794290883827974 1531.0
+/gate/source/mybeam/gps/hist/point 3.8376530457267655 1512.0
+/gate/source/mybeam/gps/hist/point 3.8810152076255573 1421.0
+/gate/source/mybeam/gps/hist/point 3.9243773695243487 1363.0
+/gate/source/mybeam/gps/hist/point 3.96773953142314 1305.0
+/gate/source/mybeam/gps/hist/point 4.0111016933219314 1259.0
+/gate/source/mybeam/gps/hist/point 4.054463855220723 1234.0
+/gate/source/mybeam/gps/hist/point 4.097826017119514 1120.0
+/gate/source/mybeam/gps/hist/point 4.141188179018306 1157.0
+/gate/source/mybeam/gps/hist/point 4.184550340917097 1053.0
+/gate/source/mybeam/gps/hist/point 4.227912502815889 947.0
+/gate/source/mybeam/gps/hist/point 4.271274664714681 933.0
+/gate/source/mybeam/gps/hist/point 4.314636826613472 968.0
+/gate/source/mybeam/gps/hist/point 4.357998988512263 874.0
+/gate/source/mybeam/gps/hist/point 4.401361150411055 809.0
+/gate/source/mybeam/gps/hist/point 4.444723312309846 829.0
+/gate/source/mybeam/gps/hist/point 4.488085474208638 738.0
+/gate/source/mybeam/gps/hist/point 4.531447636107429 704.0
+/gate/source/mybeam/gps/hist/point 4.574809798006221 685.0
+/gate/source/mybeam/gps/hist/point 4.618171959905013 617.0
+/gate/source/mybeam/gps/hist/point 4.661534121803804 609.0
+/gate/source/mybeam/gps/hist/point 4.704896283702595 532.0
+/gate/source/mybeam/gps/hist/point 4.748258445601387 571.0
+/gate/source/mybeam/gps/hist/point 4.791620607500178 559.0
+/gate/source/mybeam/gps/hist/point 4.8349827693989695 489.0
+/gate/source/mybeam/gps/hist/point 4.878344931297761 471.0
+/gate/source/mybeam/gps/hist/point 4.921707093196552 441.0
+/gate/source/mybeam/gps/hist/point 4.965069255095344 414.0
+/gate/source/mybeam/gps/hist/point 5.008431416994136 393.0
+/gate/source/mybeam/gps/hist/point 5.051793578892927 358.0
+/gate/source/mybeam/gps/hist/point 5.095155740791719 338.0
+/gate/source/mybeam/gps/hist/point 5.13851790269051 344.0
+/gate/source/mybeam/gps/hist/point 5.1818800645893015 299.0
+/gate/source/mybeam/gps/hist/point 5.225242226488093 280.0
+/gate/source/mybeam/gps/hist/point 5.268604388386884 263.0
+/gate/source/mybeam/gps/hist/point 5.311966550285676 227.0
+/gate/source/mybeam/gps/hist/point 5.355328712184468 237.0
+/gate/source/mybeam/gps/hist/point 5.398690874083259 215.0
+/gate/source/mybeam/gps/hist/point 5.442053035982051 202.0
+/gate/source/mybeam/gps/hist/point 5.485415197880842 189.0
+/gate/source/mybeam/gps/hist/point 5.5287773597796335 176.0
+/gate/source/mybeam/gps/hist/point 5.572139521678425 153.0
+/gate/source/mybeam/gps/hist/point 5.615501683577216 129.0
+/gate/source/mybeam/gps/hist/point 5.658863845476008 119.0
+/gate/source/mybeam/gps/hist/point 5.702226007374799 116.0
+/gate/source/mybeam/gps/hist/point 5.74558816927359 98.0
+/gate/source/mybeam/gps/hist/point 5.788950331172383 98.0
+/gate/source/mybeam/gps/hist/point 5.832312493071174 84.0
+/gate/source/mybeam/gps/hist/point 5.875674654969965 90.0
+/gate/source/mybeam/gps/hist/point 5.919036816868757 46.0
+/gate/source/mybeam/gps/hist/point 5.962398978767548 57.0
+/gate/source/mybeam/gps/hist/point 6.00576114066634 49.0
+/gate/source/mybeam/gps/hist/point 6.049123302565131 31.0
+/gate/source/mybeam/gps/hist/point 6.092485464463922 35.0
+/gate/source/mybeam/gps/hist/point 6.135847626362715 20.0
+/gate/source/mybeam/gps/hist/point 6.179209788261506 16.0
+/gate/source/mybeam/gps/hist/point 6.222571950160297 14.0
+/gate/source/mybeam/gps/hist/point 6.265934112059089 11.0
+/gate/source/mybeam/gps/hist/point 6.30929627395788 3.0
+/gate/source/mybeam/gps/hist/point 6.352658435856672 4.0
+/gate/source/mybeam/gps/hist/point 6.396020597755463 2.0
+/gate/source/mybeam/gps/hist/point 6.439382759654254 2.0
+/gate/source/mybeam/gps/hist/point 6.482744921553046 2.0
+/gate/source/mybeam/gps/hist/inter Log
+
+#=====================================================
+# START BEAMS
+#=====================================================
+
+/gate/random/setEngineName MersenneTwister
+/gate/random/setEngineSeed {seed}
+#1234567890
+/gate/application/noGlobalOutput
+
+#/tracking/verbose 2
+
+/gate/application/setTotalNumberOfPrimaries {primaries}
+#1000
+/gate/application/start
