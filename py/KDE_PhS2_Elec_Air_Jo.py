@@ -44,7 +44,7 @@ for i in range(file_num,file_num+1):
         newdfsub["Z"]=-0.0000005
         newdfsub=newdfsub.dropna(axis='index')
         newdfsub=newdfsub.astype('float32')
-        newdfsub.to_root(f"/work/as17540/PhaseSpaces/Generated_PhS2_10x10_Electrons/Jo_generatedElectron_PhS2_10x10_{air_density}_{jobID}.root", key='PhaseSpace')
+        newdfsub.to_root(f"/work/as17540/PhaseSpaces/Generated_PhS2_10x10_Electrons/Jo_generatedElectron_PhS2_10x10_{air_density}_{i}.root", key='PhaseSpace')
         print("root file saved",i)
 
 print("Finished")
