@@ -135,7 +135,7 @@ Breast: d=1.020 g/cm3 ; n = 8
 	+el: name=Phosphor;   f=0.0010
 	+el: name=Chlorine ;  f=0.0010
 
-Air: d=1.01675 mg/cm3 ; n=4 ; state=gas
+Air: d=1.04125 mg/cm3 ; n=4 ; state=gas
 	+el: name=Nitrogen;   f=0.755268
 	+el: name=Oxygen;     f=0.231781
 	+el: name=Argon;      f=0.012827
